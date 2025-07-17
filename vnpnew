@@ -1,1 +1,25 @@
 
+-- Đặt script này trong ServerScriptService
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ChatService = ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents"):WaitForChild("SayMessageRequest")
+
+-- Danh sách các thông báo vui nhộn
+local messages = {
+    "Con Xin Lỗi Bố VNPW😭🙏 từ nay con không spam nữa",
+}
+
+-- Hàm gửi thông báo
+local function sendFunnyMessage()
+    local randomMessage = messages[math.random(1, #messages)]
+    for _, player in pairs(Players:GetPlayers()) do
+        ChatService:FireClient(player, randomMessage, "All")
+    end
+end
+
+
+while true do
+    sendFunnyMessage()
+    task.wait(0)
+end
